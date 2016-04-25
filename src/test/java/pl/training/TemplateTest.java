@@ -22,7 +22,7 @@ public class TemplateTest {
 
     @Test
     public void shouldEvaluateTextWithExpressions() {
-        assertEquals(template.evaluate(parameters), "My name is John Smith");
+        assertEquals("My name is John Smith", template.evaluate(parameters));
     }
 
     @Test(expected = IllegalArgumentException.class)
