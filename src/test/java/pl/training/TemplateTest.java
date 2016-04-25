@@ -18,4 +18,9 @@ public class TemplateTest {
         Assert.assertEquals(template.evaluate(parameters), "My name is John Smith");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenParameterIsMissing() {
+        new Template("My name is ${firstName} ${lastName}").evaluate(new HashMap<>());
+    }
+
 }
