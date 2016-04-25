@@ -15,14 +15,22 @@ public class Template {
     }
 
     public String evaluate(Map<String, String> parameters) {
-        String result = textWithExpressions;
-        for (Map.Entry<String, String> parameter : parameters.entrySet()) {
-            result = result.replaceAll(createExpression(parameter.getKey()), parameter.getValue());
-        }
+        String result = substituteParameters(textWithExpressions, parameters);
+        validateEvaluatedText(result);
+        return result;
+    }
+
+    private void validateEvaluatedText(String result) {
         if (result.matches(EXPRESSION)) {
             throw new IllegalArgumentException();
         }
-        return result;
+    }
+
+    private String substituteParameters(String textWithExpressions, Map<String, String> parameters) {
+        for (Map.Entry<String, String> parameter : parameters.entrySet()) {
+            textWithExpressions = textWithExpressions.replaceAll(createExpression(parameter.getKey()), parameter.getValue());
+        }
+        return textWithExpressions;
     }
 
     private String createExpression(String parameterName) {
