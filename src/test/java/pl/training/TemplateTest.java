@@ -15,7 +15,7 @@ public class TemplateTest {
         parameters.put("lastName", "Smith");
 
         Template template = new Template("My name is ${firstName} ${lastName}");
-        Assert.assertEquals(template.evaluate(parameters), "My name is John Smith");
+        Assert.assertEquals("My name is John Smith", template.evaluate(parameters));
     }
 
 }
