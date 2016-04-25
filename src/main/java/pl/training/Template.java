@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class Template {
 
+    private static final String EXPRESSION_START = "\\$\\{";
+    private static final String EXPRESSION_END = "\\}";
+
     private String textWithExpressions;
 
     public Template(String textWithExpressions) {
@@ -12,9 +15,13 @@ public class Template {
 
     public String evaluate(Map<String, String> parameters) {
         for (Map.Entry<String, String> parameter : parameters.entrySet()) {
-            textWithExpressions = textWithExpressions.replaceAll("\\$\\{" + parameter.getKey() + "\\}", parameter.getValue());
+            textWithExpressions = textWithExpressions.replaceAll(createExpression(parameter.getKey()), parameter.getValue());
         }
         return textWithExpressions;
+    }
+
+    private String createExpression(String parameterName) {
+        return EXPRESSION_START + parameterName + EXPRESSION_END;
     }
 
 }
