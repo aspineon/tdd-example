@@ -14,10 +14,11 @@ public class Template {
     }
 
     public String evaluate(Map<String, String> parameters) {
+        String result = textWithExpressions;
         for (Map.Entry<String, String> parameter : parameters.entrySet()) {
-            textWithExpressions = textWithExpressions.replaceAll(createExpression(parameter.getKey()), parameter.getValue());
+            result = result.replaceAll(createExpression(parameter.getKey()), parameter.getValue());
         }
-        return textWithExpressions;
+        return result;
     }
 
     private String createExpression(String parameterName) {
