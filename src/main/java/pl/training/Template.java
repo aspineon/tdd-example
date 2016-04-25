@@ -6,6 +6,7 @@ public class Template {
 
     private static final String EXPRESSION_START = "\\$\\{";
     private static final String EXPRESSION_END = "\\}";
+    private static final String EXPRESSION = ".*\\$\\{[^}]+\\}.*";
 
     private String textWithExpressions;
 
@@ -14,8 +15,12 @@ public class Template {
     }
 
     public String evaluate(Map<String, String> parameters) {
+        String result = textWithExpressions;
         for (Map.Entry<String, String> parameter : parameters.entrySet()) {
-            textWithExpressions = textWithExpressions.replaceAll(createExpression(parameter.getKey()), parameter.getValue());
+            result = result.replaceAll(createExpression(parameter.getKey()), parameter.getValue());
+        }
+        if (result.matches(EXPRESSION)) {
+            throw new IllegalArgumentException();
         }
         return textWithExpressions;
     }
