@@ -22,7 +22,7 @@ public class Template {
         if (result.matches(EXPRESSION)) {
             throw new IllegalArgumentException();
         }
-        return textWithExpressions;
+        return result;
     }
 
     private String createExpression(String parameterName) {
