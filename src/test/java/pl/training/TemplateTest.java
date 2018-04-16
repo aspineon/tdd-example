@@ -13,9 +13,11 @@ public class TemplateTest {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("firstName", "John");
         parameters.put("lastName", "Smith");
-
         Template template = new Template("My name is ${firstName} ${lastName}");
-        Assert.assertEquals("My name is John Smith", template.evaluate(parameters));
+
+        String result = template.evaluate(parameters);
+
+        Assert.assertEquals("My name is John Smith", result);
     }
 
 }
